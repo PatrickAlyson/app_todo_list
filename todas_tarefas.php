@@ -17,7 +17,7 @@ require './tarefa_controller.php';
 	<script>
 		function editar(id, txt_tarefa) {
 			let form = document.createElement("form");
-			form.action = './tarefa_controller.php?acao=atualizar';
+			form.action = './tarefa_controller.php?acao=atualizar&local=todas_tarefas';
 			form.method = 'post';
 			form.className = 'row';
 
@@ -52,11 +52,11 @@ require './tarefa_controller.php';
 		}
 
 		function remover(id) {
-			location.href = './todas_tarefas.php?acao=remover&id=' + id;
+			location.href = './todas_tarefas.php?acao=remover&id=' + id + '&local=todas_tarefas';
 		}
 
 		function marcarRealizada(id) {
-			location.href = './todas_tarefas.php?acao=marcarRealizada&id=' + id;
+			location.href = './todas_tarefas.php?acao=marcarRealizada&id=' + id + '&local=todas_tarefas';
 		}
 	</script>
 </head>
@@ -83,6 +83,14 @@ require './tarefa_controller.php';
 
 		<div class="bg-success pt-2 text-white d-flex justify-content-center">
 			<h5>Remoção realizada com sucesso!!</h5>
+		</div>
+
+	<?php } ?>
+
+	<?php if (isset($_GET['realizada']) && $_GET['realizada'] == 1) { ?>
+
+		<div class="bg-success pt-2 text-white d-flex justify-content-center">
+			<h5>Atividade realizada com sucesso!!</h5>
 		</div>
 
 	<?php } ?>

@@ -15,12 +15,48 @@ require './tarefa_controller.php';
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 	<script>
+		function editar(id, txt_tarefa) {
+			let form = document.createElement("form");
+			form.action = './tarefa_controller.php?acao=atualizar&local=index';
+			form.method = 'post';
+			form.className = 'row';
+
+			let inputTarefa = document.createElement("input");
+			inputTarefa.type = 'text';
+			inputTarefa.name = 'tarefa';
+			inputTarefa.className = 'form-control';
+			inputTarefa.className = 'col-9 form-control';
+			inputTarefa.value = txt_tarefa;
+
+			// Create a hidden input to keep the id
+			let inputId = document.createElement('input');
+			inputId.type = 'hidden';
+			inputId.name = 'id';
+			inputId.value = id;
+
+			let button = document.createElement("button");
+			button.type = 'submit';
+			button.className = 'col-3 btn btn-info';
+			button.innerHTML = 'Atualizar';
+
+			form.appendChild(inputTarefa);
+			form.appendChild(inputId);
+			form.appendChild(button);
+
+			let tarefa = document.getElementById('tarefa_' + id);
+			tarefa.innerHTML = '';
+
+
+			tarefa.insertBefore(form, tarefa[0]);
+
+		}
+
 		function remover(id) {
-			location.href = './index.php?acao=remover&id=' + id;
+			location.href = './index.php?acao=remover&id=' + id + '&local=index';
 		}
 
 		function marcarRealizada(id) {
-			location.href = './index.php?acao=marcarRealizada&id=' + id;
+			location.href = './index.php?acao=marcarRealizada&id=' + id + '&local=index';
 		}
 	</script>
 </head>
@@ -34,6 +70,31 @@ require './tarefa_controller.php';
 			</a>
 		</div>
 	</nav>
+
+	<?php if (isset($_GET['atualizacao']) && $_GET['atualizacao'] == 1) { ?>
+
+		<div class="bg-success pt-2 text-white d-flex justify-content-center">
+			<h5>Atualização realizada com sucesso!!</h5>
+		</div>
+
+	<?php } ?>
+
+	<?php if (isset($_GET['remocao']) && $_GET['remocao'] == 1) { ?>
+
+		<div class="bg-success pt-2 text-white d-flex justify-content-center">
+			<h5>Remoção realizada com sucesso!!</h5>
+		</div>
+
+	<?php } ?>
+
+	<?php if (isset($_GET['realizada']) && $_GET['realizada'] == 1) { ?>
+
+		<div class="bg-success pt-2 text-white d-flex justify-content-center">
+			<h5>Atividade realizada com sucesso!!</h5>
+		</div>
+
+	<?php } ?>
+
 
 	<div class="container app">
 		<div class="row">
