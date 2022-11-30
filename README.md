@@ -6,5 +6,5 @@
   <img src="https://i.ibb.co/RQSQ6kS/todos.png" width="45%" />
 </p>
 
-This is a simple to do list app.
+This is a simple to do list app. <br></br>
 Live Demo: http://todoappportfolioproject.infinityfreeapp.com/
